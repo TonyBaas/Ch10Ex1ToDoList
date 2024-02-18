@@ -16,10 +16,10 @@ namespace ToDoList.Controllers
             // load current filters and data needed for filter drop downs in ViewBag
             ToDoViewModel model = new ToDoViewModel();
             var filters = new Filters(id);
-            ViewBag.Filters = filters;
-            ViewBag.Categories = context.Categories.ToList();
-            ViewBag.Statuses = context.Statuses.ToList();
-            ViewBag.DueFilters = Filters.DueFilterValues;
+            model.Filters = filters;
+            model.Categories = context.Categories.ToList();
+            model.Statuses = context.Statuses.ToList();
+            model.DueFilters = Filters.DueFilterValues;
 
             // get ToDo objects from database based on current filters
             IQueryable<ToDo> query = context.ToDos
