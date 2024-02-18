@@ -14,6 +14,7 @@ namespace ToDoList.Controllers
         public IActionResult Index(string id)
         {
             // load current filters and data needed for filter drop downs in ViewBag
+            ToDoViewModel model = new ToDoViewModel();
             var filters = new Filters(id);
             ViewBag.Filters = filters;
             ViewBag.Categories = context.Categories.ToList();
@@ -39,7 +40,9 @@ namespace ToDoList.Controllers
                     query = query.Where(t => t.DueDate == today);
             }
             var tasks = query.OrderBy(t => t.DueDate).ToList();
-            return View(tasks);
+
+            model.Tasks = tasks;
+            return View(model);
         }
 
         public IActionResult Add()
